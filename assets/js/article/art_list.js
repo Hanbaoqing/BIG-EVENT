@@ -126,7 +126,7 @@ $(function() {
 		var num = $('.btnDELETE').length
 
 		// 当前对应的ID
-		var Id = $(this).attr('data-id')
+		var id = $(this).attr('data-id')
 		// 询问用户是否删除
 		layer.confirm('确认删除?', {
 			icon: 3,
@@ -134,17 +134,17 @@ $(function() {
 		}, function(index) {
 			$.ajax({
 				type: 'GET',
-				url: '/my/article/deletecate/' + Id,
+				url: '/my/article/delete/' + id,
 				success: function(res) {
 					if (res.status !== 0) {
-						layer.msg(res.message)
+						return layer.msg(res.message)
 					}
 					layer.msg('删除成功')
 					// 删除成功后判断该页是否还有数据
 					// 如果没有 页码值减一 再渲染数据
 					if (num === 1) {
 						// 如果num=1 证明删除之后就没有数据了
-						
+
 						// 页码值最小为1
 						q.pagenum = q.pagenum === 1 ? 1 : q.pagenum - 1
 					}
@@ -154,9 +154,9 @@ $(function() {
 			layer.close(index)
 		})
 	})
-	
-	
-	
+
+
+
 
 
 
